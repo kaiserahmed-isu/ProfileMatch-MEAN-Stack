@@ -1,0 +1,26 @@
+<h2>{{Title}}</h2>
+<hr>
+<table class="table">
+    <tr>
+        <th>Record No.</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Position</th>
+        <th>Industries</th>
+        <th>Interests</th>
+        <th>Comments</th>
+    </tr>
+    <tr ng-repeat="item in users">
+        <td>{{$index+1}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.gender}}</td>
+        <td>{{item.position}}</td>
+        <td>{{item.industries}}</td>
+        <td>{{item.interests}}</td>
+        <td>{{item.comments}}</td>
+        <td>
+            <a ui-sref="edit({id:item._id})" class="btn btn-success">Edit</a>
+            <a href="#" ng-click="delete(item._id)" class="btn btn-warning">Delete</a>
+        </td>
+    </tr>
+</table>
