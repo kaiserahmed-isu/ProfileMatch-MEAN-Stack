@@ -1,36 +1,51 @@
 angular
     .module("myApp")
-    .controller("userController", function($scope, $rootScope, $state, $stateParams, userService) {
+    .controller("userController", function ($scope, $rootScope, $state, $stateParams, userService) {
         if ($state.current.name == "home") {
             $rootScope.Title = "User Listing";
-            userService.getUsers().then(function(results) {
+            userService.getUsers().then(function (results) {
                 $scope.users = results.data;
-//                console.log($scope.users);
+                //                console.log($scope.users);
             });
         } else if ($state.current.name == "create") {
             $rootScope.Title = "Create User";
+
+            $scope.dataGender = {
+                availableOptions: [
+                  'Male',
+                  'Female'
+                ]
+            };
+
         } else if ($state.current.name == "edit") {
             $rootScope.Title = "Update User";
             var id = $stateParams.id;
-            userService.getUser(id).then(function(results) {
+            userService.getUser(id).then(function (results) {
                 $scope.user = results.data;
+//                 console.log($scope.user);
+                $scope.dataGender = {
+                    availableOptions: [
+                  'Male',
+                  'Female'
+                ]
+                };
             });
         }
 
-        $scope.saveData = function(user) {
-//            console.log(user);
+        $scope.saveData = function (user) {
+                        console.log(user);
             if ($scope.userForm.$valid) {
                 if (user._id) {
                     console.log(user._id);
-                    userService.modifyUser(user).then(function(results) {
-//                         console.log(results);
+                    userService.modifyUser(user).then(function (results) {
+                        //                         console.log(results);
                         if (results.data == "updated") {
                             $state.go("home");
                         }
                     });
                 } else {
-                    userService.addUser(user).then(function(results) {
-//                         console.log(results);
+                    userService.addUser(user).then(function (results) {
+                        //                         console.log(results);
                         if (results.data == "created") {
                             $state.go("home");
                         }
@@ -39,11 +54,13 @@ angular
             }
         };
 
-        $scope.delete = function(id) {
+        $scope.delete = function (id) {
             if (confirm('Are you sure to delete?')) {
-                userService.deleteUser(id).then(function(results) {
+                userService.deleteUser(id).then(function (results) {
                     if (results.data == "deleted") {
-                        $state.go("home", {}, { reload: true });
+                        $state.go("home", {}, {
+                            reload: true
+                        });
                     }
                 });
             }

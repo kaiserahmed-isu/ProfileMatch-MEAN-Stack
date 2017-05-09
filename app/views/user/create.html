@@ -13,16 +13,21 @@
     <div class="form-group">
         <label class="col-sm-2">Gender</label>
         <div class="col-sm-10">
-            <input type="text" name="gender" ng-model="user.gender" ng-required="true" class="form-control">
+<!--            <input type="text" name="gender" ng-model="user.gender" ng-required="true" class="form-control">-->
+            <select name="gender" ng-model="user.gender" ng-required="true" class="form-control" ng-options="x for x in dataGender.availableOptions" >
+            </select>
             <div class="text-danger" ng-messages="userForm.gender.$error" ng-show="userForm.gender.$dirty || userForm.$submitted">
                 <span ng-message="required">Please Enter gender</span>
             </div>
+            
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2">Position</label>
         <div class="col-sm-10">
             <input type="text" name="position" ng-model="user.position" ng-required="true" class="form-control">
+
+            
             <div class="text-danger" ng-messages="userForm.position.$error" ng-show="userForm.position.$dirty || userForm.$submitted">
                 <span ng-message="required">Please Enter position </span>
             </div>
@@ -49,14 +54,16 @@
     <div class="form-group">
         <label class="col-sm-2">Comments</label>
         <div class="col-sm-10">
-            <input type="text" name="comments" ng-model="user.comments" ng-required="false" class="form-control">
+           
+            <textarea rows="7" name="comments" ng-model="user.comments" ng-required="false" class="form-control">
+            </textarea>
             
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-10 col-sm-offset-2">
             <button type="submit" class="btn btn-primary">Submit</button>
-            <a ui-sref="home" class="btn btn-warning">Cancel</a>
+            <a ui-sref="home" class="btn btn-danger">Cancel</a>
         </div>
     </div>
 </form>
